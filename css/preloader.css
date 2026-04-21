@@ -1,0 +1,379 @@
+.great-vibes-regular {
+    font-family: "Great Vibes", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+body.non-active {
+    overflow: hidden;
+}
+
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background-image: url('../images/bg.avif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #2a1b38;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+/* Винтажная зернистость */
+.preloader::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-radial-gradient(circle at 20% 30%, rgba(0,0,0,0.15) 0px, rgba(0,0,0,0.15) 2px, transparent 2px, transparent 4px);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Виньетка */
+.preloader::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.6) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Декоративная ретро-рамка */
+.preloader__container {
+    position: relative;
+    z-index: 2;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.preloader__container::before {
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    border: 2px solid rgba(245, 208, 0, 0.3);
+    border-radius: 30px;
+    pointer-events: none;
+    animation: borderPulse 3s ease-in-out infinite alternate;
+}
+
+/* Уголки рамки */
+.preloader__container::after {
+    content: "✦ ✦ ✦";
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    color: rgba(245, 208, 0, 0.6);
+    background: rgba(0,0,0,0.5);
+    padding: 0 20px;
+    border-radius: 30px;
+    letter-spacing: 10px;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+/* Заголовок */
+.preloader__textmain {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    padding: 30px 20px 20px 20px;
+    color: rgba(245, 208, 0, 0.95);
+    font-size: 70px;
+    text-shadow: 0 0 20px rgba(245, 208, 0, 0.6), 2px 2px 4px rgba(0,0,0,0.5);
+    animation: titleGlow 2s ease-in-out infinite alternate;
+    letter-spacing: 3px;
+}
+
+/* Основной блок */
+.preloader__main {
+    position: relative;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(12px);
+    padding: 50px 70px;
+    border-radius: 40px;
+    border: 1px solid rgba(245, 208, 0, 0.5);
+    box-shadow: 0 0 60px rgba(0,0,0,0.4), inset 0 0 30px rgba(245, 208, 0, 0.1);
+    animation: slideUp 0.8s ease-out;
+    min-width: 320px;
+}
+
+/* Стили для трёх нот (спиннер) */
+.preloader__spinner {
+    position: relative;
+    height: 80px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.note {
+    width: 40px;
+    height: 40px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    animation: floatNote 2s ease-in-out infinite;
+}
+
+.note1 {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffd700"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>');
+    animation-delay: 0s;
+    transform: rotate(-10deg);
+}
+
+.note2 {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffd700"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/><path d="M18 7h-4v4h4V7z"/></svg>');
+    animation-delay: 0.3s;
+    width: 35px;
+    height: 35px;
+}
+
+.note3 {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffd700"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/><path d="M6 7h4v4H6z"/></svg>');
+    animation-delay: 0.6s;
+    transform: rotate(10deg);
+}
+
+/* Текст внутри блока */
+.preloader__text {
+    font-family: "Great Vibes", cursive;
+    font-size: 42px;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    margin-bottom: 35px;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, #fff, rgba(245, 208, 0, 0.9));
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    white-space: nowrap;
+}
+
+/* Кнопка */
+.preloader__button {
+    font-family: 'Arial', sans-serif;
+    font-size: 22px;
+    font-weight: bold;
+    padding: 16px 45px;
+    background: linear-gradient(135deg, #e6b800, #ffd700);
+    border: none;
+    border-radius: 60px;
+    color: #2a1b38;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.4), 0 0 15px rgba(245, 208, 0, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    position: relative;
+    overflow: hidden;
+}
+
+.preloader__button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+    transition: left 0.5s;
+}
+
+.preloader__button:hover::before {
+    left: 100%;
+}
+
+.preloader__button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.5), 0 0 25px rgba(245, 208, 0, 0.9);
+    background: linear-gradient(135deg, #ffd700, #e6b800);
+}
+
+.preloader__button:active {
+    transform: scale(0.98);
+}
+
+/* Дополнительные декоративные элементы по углам контейнера */
+.preloader__main::before,
+.preloader__main::after {
+    content: "✧";
+    position: absolute;
+    font-size: 30px;
+    color: rgba(245, 208, 0, 0.5);
+    animation: rotate 4s linear infinite;
+}
+
+.preloader__main::before {
+    top: -15px;
+    left: -15px;
+    transform: rotate(0deg);
+}
+
+.preloader__main::after {
+    bottom: -15px;
+    right: -15px;
+    transform: rotate(180deg);
+}
+
+/* Плавающие большие ноты по всему экрану */
+.floating-note {
+    position: absolute;
+    font-size: 40px;
+    color: rgba(245, 208, 0, 0.2);
+    pointer-events: none;
+    z-index: 1;
+    animation: floatBigNote 8s ease-in-out infinite;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes titleGlow {
+    0% {
+        text-shadow: 0 0 10px rgba(245, 208, 0, 0.4), 2px 2px 4px rgba(0,0,0,0.5);
+        opacity: 0.9;
+    }
+    100% {
+        text-shadow: 0 0 40px rgba(245, 208, 0, 0.9), 2px 2px 8px rgba(0,0,0,0.6);
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes floatNote {
+    0% {
+        transform: translateY(0px) rotate(0deg);
+        opacity: 0.5;
+    }
+    50% {
+        transform: translateY(-15px) rotate(5deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(0px) rotate(0deg);
+        opacity: 0.5;
+    }
+}
+
+@keyframes borderPulse {
+    0% {
+        border-color: rgba(245, 208, 0, 0.2);
+        box-shadow: 0 0 0px rgba(245, 208, 0, 0.1);
+    }
+    100% {
+        border-color: rgba(245, 208, 0, 0.6);
+        box-shadow: 0 0 20px rgba(245, 208, 0, 0.2);
+    }
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes floatBigNote {
+    0% {
+        transform: translateY(0px) rotate(0deg);
+        opacity: 0;
+    }
+    20% {
+        opacity: 0.3;
+    }
+    80% {
+        opacity: 0.3;
+    }
+    100% {
+        transform: translateY(-100px) rotate(15deg);
+        opacity: 0;
+    }
+}
+
+/* Адаптив */
+@media (max-width: 768px) {
+    .preloader__textmain {
+        font-size: 45px;
+        padding-top: 20px;
+    }
+    
+    .preloader__main {
+        padding: 35px 40px;
+        margin: 0 20px;
+        min-width: auto;
+    }
+    
+    .preloader__text {
+        font-size: 32px;
+        white-space: normal;
+    }
+    
+    .preloader__button {
+        font-size: 18px;
+        padding: 12px 30px;
+    }
+    
+    .preloader__container::before {
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+    }
+    
+    .preloader__spinner {
+        gap: 20px;
+    }
+    
+    .note {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+/* Десктопные украшения */
+@media (min-width: 1024px) {
+    .preloader__main {
+        padding: 60px 90px;
+    }
+    
+    .preloader__textmain {
+        font-size: 85px;
+    }
+    
+    .preloader__text {
+        font-size: 48px;
+    }
+}

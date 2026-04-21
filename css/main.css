@@ -1,0 +1,477 @@
+.great-vibes-regular {
+    font-family: "Great Vibes", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+body.non-active {
+    overflow: hidden;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+/* Винтажная зернистость для main */
+.main::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-radial-gradient(circle at 20% 30%, rgba(0, 0, 0, 0.08) 0px, rgba(0, 0, 0, 0.08) 2px, transparent 2px, transparent 4px);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Виньетка для main */
+.main::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, transparent 60%, rgba(0, 0, 0, 0.4) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.main {
+    position: relative;
+    background-image: url('../images/bg.avif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #2a1b38;
+    overflow-x: hidden;
+    width: 100%;
+    overflow-y: hidden;
+}
+
+.firstPage {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+}
+
+.firstPage__mainText {
+    font-family: "Great Vibes", cursive;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 2px;
+    white-space: pre-wrap;
+    color: rgba(245, 0, 0, 0.95);
+    text-shadow: 0 0 20px rgba(245, 208, 0, 0.6), 2px 2px 4px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    max-width: 90%;
+    z-index: 2;
+    margin-bottom: 20px;
+}
+
+/* Надпись 17.05 по центру */
+.firstPage_date {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-15deg);
+    font-family: "Great Vibes", cursive;
+    font-size: 150px;
+    color: rgba(245, 0, 0, 0.2);
+    text-shadow: 0 0 30px rgba(245, 0, 0, 0.15);
+    z-index: 1;
+    pointer-events: none;
+    font-weight: bold;
+    white-space: nowrap;
+    letter-spacing: 5px;
+}
+
+/* Фото */
+.firstPhoto {
+    visibility: hidden;
+    text-align: center;
+    margin-top: 20px;
+    z-index: 2;
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.firstPhoto.visible {
+    visibility: visible;
+}
+
+.ph {
+    height: auto;
+    width: 100%;
+    max-width: 330px;
+    border-radius: 40px;
+    border: 5px solid white;
+    box-shadow: 0 0 30px rgba(245, 0, 0, 0.3);
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
+
+.firstPhoto.visible .ph {
+    opacity: 1;
+}
+
+/* Летающие элементы */
+.floating-decor {
+    position: fixed;
+    font-size: 20px;
+    color: rgba(245, 0, 0, 0.7);
+    text-shadow: 0 0 20px rgba(245, 0, 0, 0.5);
+    z-index: 100;
+    pointer-events: none;
+    animation: flyAround 10s linear forwards;
+    opacity: 0.7;
+}
+
+.floating-note-mini {
+    position: fixed;
+    font-size: 20px;
+    color: rgba(245, 0, 0, 0.7);
+    text-shadow: 0 0 20px rgba(245, 0, 0, 0.5);
+    z-index: 100;
+    pointer-events: none;
+    animation: flyAroundSlow 12s linear forwards;
+    opacity: 0.7;
+}
+
+@keyframes flyAround {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 0.7;
+    }
+    100% {
+        transform: translate(var(--moveX, 100px), var(--moveY, -100px)) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes flyAroundSlow {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 0.7;
+    }
+    100% {
+        transform: translate(var(--moveX, -100px), var(--moveY, -100px)) rotate(-360deg);
+        opacity: 0;
+    }
+}
+
+@media (min-width: 1024px) {
+    .firstPage {
+        gap: 30px;
+    }
+    
+    .ph {
+        max-width: 400px;
+    }
+    
+    .firstPage__mainText {
+        margin-bottom: 0;
+    }
+}
+
+@media (min-height: 900px) {
+    .ph {
+        max-width: 420px;
+    }
+}
+
+/* Стрелка для скролла */
+.scroll-arrow {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    cursor: pointer;
+    background: rgba(245, 0, 0, 0.3);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(245, 208, 0, 0.5);
+}
+
+.scroll-arrow.visible {
+    display: flex;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+.scroll-arrow:hover {
+    background: rgba(245, 0, 0, 0.5);
+    transform: translateX(-50%) scale(1.1);
+    border-color: rgba(245, 208, 0, 0.8);
+}
+
+.arrow-down {
+    font-size: 30px;
+    color: #ffd700;
+    font-weight: bold;
+    display: block;
+    z-index: 9999;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    50% {
+        transform: translateX(-50%) translateY(10px);
+    }
+}
+
+/* Адаптив */
+@media (max-width: 768px) {
+    .firstPage_date {
+        font-size: 80px;
+    }
+    
+    .firstPage__mainText {
+        font-size: 24px;
+        padding: 50px 0px 0px 0px;
+    }
+    
+    .ph {
+        height: 430px;
+        width: 250px;
+    }
+    
+    .scroll-arrow {
+        width: 40px;
+        height: 40px;
+        bottom: 20px;
+    }
+    
+    .arrow-down {
+        font-size: 24px;
+    }
+    
+    .floating-decor,
+    .floating-note-mini {
+        font-size: 16px;
+    }
+}
+
+
+
+/* Добавьте в конец файла main.css */
+
+/* Адаптация для десктопа */
+@media (min-width: 1024px) {
+    .firstPage {
+        justify-content: center;
+        padding: 40px 20px;
+    }
+    
+    .firstPage__mainText {
+        font-size: 32px;
+        max-width: 700px;
+        margin-bottom: 30px;
+    }
+    
+    .ph {
+        max-width: 450px;
+    }
+    
+    .firstPage_date {
+        font-size: 200px;
+    }
+}
+
+/* Для планшетов */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .firstPage {
+        padding: 30px 20px;
+    }
+    
+    .firstPage__mainText {
+        font-size: 38px;
+        max-width: 600px;
+    }
+    
+    .ph {
+        max-width: 380px;
+    }
+    
+    .firstPage_date {
+        font-size: 120px;
+    }
+}
+
+/* Для мобильных 375px */
+@media (max-width: 480px) {
+    .firstPage {
+        padding: 20px 15px;
+    }
+    
+    .firstPage__mainText {
+        font-size: 35px;
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+    
+    .ph {
+        max-width: 280px;
+        border-width: 3px;
+    }
+    
+    .firstPage_date {
+        font-size: 70px;
+    }
+    
+    .scroll-arrow {
+        width: 45px;
+        height: 45px;
+        bottom: 25px;
+    }
+    
+    .arrow-down {
+        font-size: 28px;
+    }
+}
+
+/* Для очень маленьких экранов 360px */
+@media (max-width: 380px) {
+    .firstPage {
+        padding: 15px 12px;
+    }
+    
+    .firstPage__mainText {
+        font-size: 20px;
+        padding: 10px;
+    }
+    
+    .ph {
+        max-width: 250px;
+    }
+    
+    .firstPage_date {
+        font-size: 60px;
+    }
+    
+    .scroll-arrow {
+        width: 40px;
+        height: 40px;
+        bottom: 20px;
+    }
+    
+    .arrow-down {
+        font-size: 24px;
+    }
+}
+.scroll-arrow {
+    pointer-events: auto !important; /* Чтобы точно кликалась */
+}
+/* Для высоких экранов */
+@media (min-height: 800px) and (min-width: 1024px) {
+    .firstPage {
+        justify-content: center;
+    }
+    
+    .ph {
+        max-width: 400px;
+    }
+    
+    .firstPage__mainText {
+        margin-bottom: 40px;
+    }
+}
+
+/* Для экранов с высотой меньше 700px */
+@media (max-height: 700px) {
+    .firstPage {
+        padding: 20px;
+    }
+    
+    .firstPage__mainText {
+        margin-bottom: 10px;
+    }
+    
+    .ph {
+        max-width: 280px;
+    }
+}
+
+
+
+/* Фото - фиксированное процентное соотношение */
+.firstPhoto {
+    visibility: hidden;
+    text-align: center;
+    margin-top: 20px;
+    z-index: 2;
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.firstPhoto.visible {
+    visibility: visible;
+}
+
+.ph {
+    width: 100%;
+    max-width: 330px;
+    height: auto;
+    aspect-ratio: 330 / 600; /* Соотношение сторон 330:600 = 0.55 */
+    border-radius: 40px;
+    border: 5px solid white;
+    box-shadow: 0 0 30px rgba(245, 0, 0, 0.3);
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
+/* Для десктопа */
+@media (min-width: 1024px) {
+    .ph {
+        max-width: 400px;
+        aspect-ratio: 400 / 727; /* Сохраняем пропорцию 330/600 = 0.55 */
+    }
+}
+
+/* Для мобильных */
+@media (max-width: 768px) {
+    .ph {
+        max-width: 280px;
+        aspect-ratio: 280 / 509;
+    }
+}
+
+@media (max-width: 480px) {
+    .ph {
+        max-width: 400px;
+        height: 600px;
+    }
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/preloader.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/secondPage.css">
+  <link rel="stylesheet" href="css/thirdPage.css">
+  <title>Приглашение на юбилей</title>
+</head>
+
+<body class="non-active">
+  <div class="preloader">
+    <div class="preloader__textmain great-vibes-regular">Юбилей Ирины</div>
+    <div class="preloader__container">
+      <div class="preloader__main">
+        <div class="preloader__spinner">
+          <div class="note note1"></div>
+          <div class="note note2"></div>
+          <div class="note note3"></div>
+        </div>
+        <div class="preloader__text">Приглашение на Юбилей</div>
+        <button class="preloader__button">
+          Открыть приглашение
+        </button>
+      </div>
+    </div>
+  </div>
+  <main class="main">
+    <div class="firstPage">
+      <div class="firstPage_date">15.05</div>
+      <div class="firstPage__mainText"></div>
+      <div class="firstPhoto">
+        <img class="ph" src="images/photoOne.png" alt="">
+      </div>
+      <div class="scroll-arrow">
+        <span class="arrow-down">↓</span>
+      </div>
+    </div>
+     <div class="secondPage">
+    <div class="calendar-container">
+      <div class="calendar">
+        <div class="calendar-month">Май</div>
+        <div class="calendar-year">2026</div>
+        <div class="calendar-days">
+          <div class="calendar-day-name">Пн</div>
+          <div class="calendar-day-name">Вт</div>
+          <div class="calendar-day-name">Ср</div>
+          <div class="calendar-day-name">Чт</div>
+          <div class="calendar-day-name">Пт</div>
+          <div class="calendar-day-name">Сб</div>
+          <div class="calendar-day-name">Вс</div>
+        </div>
+        <div class="calendar-dates" id="calendar-dates"></div>
+      </div>
+    </div>
+    
+    <div class="location-container">
+      <div class="location-title">Место проведения</div>
+      <div class="location-name">Звезда Кочевника</div>
+      <div class="location-address">ул. Курнатовского, д.96, г. Чита</div>
+    </div>
+  </div>
+
+    <div class="thirdPage">
+    <div class="thirdPage-title">Стиляги</div>
+    <div class="thirdPage-subtitle">Наше мероприятие пройдет в стиле фильма</div>
+    
+    <div class="slider-container">
+      <div class="slider">
+        <div class="slider-track" id="sliderTrack">
+          <!-- Сюда будут добавляться фото -->
+        </div>
+        <button class="slider-button slider-button-prev" id="prevBtn">←</button>
+        <button class="slider-button slider-button-next" id="nextBtn">→</button>
+      </div>
+      <div class="slider-dots" id="sliderDots"></div>
+    </div>
+  </div>
+  </main>
+  <script src="js/main.js"></script>
+  <script src="js/preloader.js"></script>
+</body>
+
+</html>

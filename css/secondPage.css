@@ -1,0 +1,328 @@
+/* Стили для второй страницы */
+.secondPage {
+    min-height: 100vh;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    position: relative;
+    z-index: 2;
+    gap: 40px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    overflow-y: auto;
+}
+
+.secondPage.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Декоративные элементы */
+.secondPage::before {
+    content: "✦";
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    font-size: 40px;
+    color: rgba(245, 0, 0, 0.2);
+    animation: floatDecor 8s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.secondPage::after {
+    content: "♪";
+    position: absolute;
+    bottom: 10%;
+    right: 5%;
+    font-size: 50px;
+    color: rgba(245, 0, 0, 0.15);
+    animation: floatDecor 10s ease-in-out infinite reverse;
+    pointer-events: none;
+}
+
+@keyframes floatDecor {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-15px) rotate(10deg);
+    }
+}
+
+/* Контейнеры */
+.calendar-container,
+.location-container {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    padding: 25px 20px;
+    border: 1px solid rgba(245, 50, 50, 0.5);
+    box-shadow: 0 0 30px rgba(245, 0, 0, 0.2);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.calendar-container:hover,
+.location-container:hover {
+    border-color: rgba(245, 80, 80, 0.8);
+    box-shadow: 0 0 40px rgba(245, 0, 0, 0.3);
+}
+
+/* Календарь */
+.calendar {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 15px;
+}
+
+.calendar-month {
+    font-family: "Great Vibes", cursive;
+    font-size: clamp(28px, 6vw, 36px);
+    color: rgba(245, 50, 50, 0.95);
+    text-shadow: 0 0 15px rgba(245, 0, 0, 0.6);
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.calendar-year {
+    font-size: clamp(16px, 4vw, 20px);
+    color: rgba(245, 80, 80, 0.8);
+    margin-bottom: 20px;
+    text-shadow: 0 0 5px rgba(245, 0, 0, 0.3);
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.calendar-day-name {
+    color: rgba(245, 80, 80, 0.7);
+    font-size: clamp(10px, 3vw, 14px);
+    padding: 8px 0;
+    font-weight: bold;
+}
+
+.calendar-dates {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.calendar-date {
+    padding: 8px 0;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: clamp(12px, 3.5vw, 16px);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    cursor: default;
+    text-align: center;
+}
+
+.calendar-date:hover {
+    background: rgba(245, 50, 50, 0.2);
+    color: rgba(245, 100, 100, 0.9);
+}
+
+.calendar-date.highlight {
+    background: linear-gradient(135deg, #cc3300, #ff4444);
+    color: #fff;
+    font-weight: bold;
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(245, 50, 50, 0.8);
+    animation: calendarPulse 2s ease-in-out infinite;
+}
+
+@keyframes calendarPulse {
+    0%, 100% {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px rgba(245, 50, 50, 0.6);
+    }
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 30px rgba(245, 80, 80, 0.9);
+    }
+}
+
+/* Место проведения */
+.location-title {
+    font-family: "Great Vibes", cursive;
+    font-size: clamp(28px, 6vw, 36px);
+    color: rgba(245, 50, 50, 0.95);
+    margin-bottom: 15px;
+    text-shadow: 0 0 15px rgba(245, 0, 0, 0.5);
+}
+
+.location-name {
+    font-size: clamp(20px, 5vw, 28px);
+    color: #ff6666;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px rgba(245, 50, 50, 0.4);
+}
+
+.location-address {
+    font-size: clamp(12px, 3.5vw, 16px);
+    color: rgba(255, 200, 200, 0.9);
+    line-height: 1.5;
+}
+
+/* Дополнительные летающие красные элементы */
+.floating-red {
+    position: absolute;
+    font-size: 18px;
+    color: rgba(245, 50, 50, 0.25);
+    pointer-events: none;
+    animation: floatRed 6s ease-in-out infinite;
+    z-index: 1;
+}
+
+
+/* Центрирование контейнеров */
+.secondPage {
+    align-items: center;
+    justify-content: center;
+}
+
+.calendar-container,
+.location-container {
+    margin-left: auto;
+    margin-right: auto;
+    align-self: center;
+}
+
+/* Центрирование - фикс */
+.secondPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.calendar-container,
+.location-container {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 500px;
+}
+
+@media (max-width: 768px) {
+    .calendar-container,
+    .location-container {
+        margin: 0 auto;
+        width: calc(100% - 40px);
+        max-width: 450px;
+    }
+}
+
+@media (max-width: 480px) {
+    .calendar-container,
+    .location-container {
+        width: calc(100% - 30px);
+        margin: 0 auto;
+    }
+}
+
+
+/* Если нужно чтобы контейнеры были строго по центру */
+@media (min-width: 1024px) {
+    .calendar-container,
+    .location-container {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@keyframes floatRed {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    20% {
+        opacity: 0.4;
+    }
+    80% {
+        opacity: 0.4;
+    }
+    100% {
+        transform: translateY(-80px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Адаптив для 360px */
+@media (max-width: 480px) {
+    .secondPage {
+        padding: 30px 15px;
+        gap: 30px;
+    }
+    
+    .calendar-container,
+    .location-container {
+        padding: 20px 15px;
+        border-radius: 20px;
+    }
+    
+    .calendar {
+        padding: 10px;
+    }
+    
+    .calendar-days {
+        gap: 3px;
+    }
+    
+    .calendar-dates {
+        gap: 3px;
+    }
+    
+    .calendar-date {
+        padding: 6px 0;
+    }
+    
+    .calendar-date.highlight {
+        transform: scale(1);
+    }
+}
+
+@media (max-width: 360px) {
+    .secondPage {
+        padding: 20px 12px;
+        gap: 25px;
+        justify-content: center;
+    }
+    
+    .calendar-container,
+    .location-container {
+        padding: 15px 12px;
+        border-radius: 16px;
+    }
+    
+    .calendar-day-name {
+        font-size: 9px;
+        padding: 5px 0;
+    }
+    
+    .calendar-date {
+        font-size: 10px;
+        padding: 5px 0;
+    }
+    
+    .calendar-month {
+        font-size: 24px;
+    }
+    
+    .location-name {
+        font-size: 18px;
+    }
+}
+
+
+
