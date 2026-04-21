@@ -366,7 +366,7 @@ body {
     }
     
     .firstPage__mainText {
-        font-size: 20px;
+        font-size: 32px;
         padding: 10px;
     }
     
@@ -471,7 +471,7 @@ body {
 
 @media (max-width: 480px) {
     .ph {
-        max-width: 400px;
-        height: 600px;
+        max-width: 300px;
+        height: 400px;
     }
 }

@@ -261,13 +261,12 @@
 /* Адаптив для 360px */
 @media (max-width: 480px) {
     .secondPage {
-        padding: 30px 15px;
-        gap: 30px;
+        gap: 15px;
     }
     
     .calendar-container,
     .location-container {
-        padding: 20px 15px;
+        padding: 10px 5px;
         border-radius: 20px;
     }
     
