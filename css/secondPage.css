@@ -3,10 +3,9 @@
     min-height: 100vh;
     height: 100vh;
     display: flex;
+    padding: 40px 0px 0px 0px;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 40px 20px;
     position: relative;
     z-index: 2;
     gap: 40px;
@@ -187,10 +186,6 @@
 
 
 /* Центрирование контейнеров */
-.secondPage {
-    align-items: center;
-    justify-content: center;
-}
 
 .calendar-container,
 .location-container {
@@ -203,8 +198,6 @@
 .secondPage {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 
 .calendar-container,
@@ -293,9 +286,7 @@
 
 @media (max-width: 360px) {
     .secondPage {
-        padding: 20px 12px;
         gap: 25px;
-        justify-content: center;
     }
     
     .calendar-container,
