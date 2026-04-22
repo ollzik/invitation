@@ -23,17 +23,20 @@ body {
     overflow-x: hidden;
 }
 
-/* Винтажная зернистость - исправляем позиционирование */
+/* Винтажная зернистость - исправляем на весь экран */
 .main::before {
     content: "";
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
     background: repeating-radial-gradient(circle at 20% 30%, rgba(0, 0, 0, 0.08) 0px, rgba(0, 0, 0, 0.08) 2px, transparent 2px, transparent 4px);
     pointer-events: none;
-    z-index: 1000; /* Увеличиваем z-index */
+    z-index: 1000;
+    will-change: transform; /* Улучшаем производительность */
 }
 
 /* Виньетка */
@@ -42,11 +45,14 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
     background: radial-gradient(ellipse at center, transparent 60%, rgba(0, 0, 0, 0.4) 100%);
     pointer-events: none;
     z-index: 1000;
+    will-change: transform;
 }
 
 /* Убеждаемся что контент выше зернистости */
