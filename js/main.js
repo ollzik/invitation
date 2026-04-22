@@ -320,11 +320,11 @@ function initSlider() {
     
     // СЮДА ВСТАВЬТЕ ПУТИ К ВАШИМ ФОТОГРАФИЯМ
     const images = [
-        'images/style1.jpg',  // замените на свои
-        'images/style2.jpg',
-        'images/style3.jpg',
-        'images/style4.jpg',
-        'images/style5.jpg'
+        'images/photoOne.png',  // замените на свои
+        'images/photoOne.png',
+        'images/photoOne.png',
+        'images/photoOne.png',
+        'images/photoOne.png'
     ];
     
     if (!sliderTrack || images.length === 0) return;

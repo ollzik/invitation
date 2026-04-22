@@ -245,3 +245,17 @@
         font-size: 16px;
     }
 }
+/* Принудительное центрирование */
+.thirdPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.slider-container {
+    align-self: center;
+    margin-left: auto;
+    margin-right: auto;
+}
