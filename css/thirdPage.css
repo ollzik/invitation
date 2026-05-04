@@ -343,7 +343,7 @@
 }
 
 /* iPhone SE и экстремально маленькие (до 320px) */
-@media (max-width: 320px) {
+@media (max-width: 380px) {
     .thirdPage {
         padding: 15px 10px;
         gap: 12px;
@@ -366,7 +366,14 @@
     
     .slide img {
         aspect-ratio: 2 / 3;
-        min-height: 200px;
+        min-height: 10px;
+        max-height:400px;
+    }
+    .thirdPage-subtitle{
+        margin: 0px;
+    }
+    .slider-container{
+        max-height: 450px;
     }
 }
 
