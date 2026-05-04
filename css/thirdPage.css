@@ -287,26 +287,30 @@
 /* Маленькие мобильные (376px - 480px) */
 @media (min-width: 376px) and (max-width: 480px) {
     .thirdPage {
-        padding: 25px 15px;
+        padding: 0px;
         gap: 20px;
     }
-    
+    .map-container{
+        display: none;
+    }
     .slider-container {
         padding: 12px;
         border-radius: 20px;
     }
     
     .thirdPage-title {
-        margin-bottom: 10px;
+        margin: 0px;
+        padding: 0px;
     }
     
     .thirdPage-subtitle {
-        margin-bottom: 10px;
+        margin-bottom: 0px;
     }
-    
+
     .slide img {
         aspect-ratio: 3 / 4;
         min-height: 250px;
+        max-height: 370px;
     }
 }
 
