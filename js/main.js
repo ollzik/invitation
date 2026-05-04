@@ -419,3 +419,166 @@ setTimeout(() => {
 
 
 
+
+
+// fourthPage
+const BOT_TOKEN = '8026015816:AAHxjC5iCQf0DteP4_URNRw74JE6pXKXMho';
+const CHAT_ID = '-1003831190327';
+
+async function sendToTelegram(messageText) {
+  const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+  const payload = {
+    chat_id: CHAT_ID,
+    text: messageText,
+    parse_mode: 'HTML',
+    disable_web_page_preview: true
+  };
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await response.json();
+    return data.ok === true;
+  } catch (error) {
+    console.error('Ошибка отправки в Telegram:', error);
+    return false;
+  }
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return str.replace(/[&<>]/g, function(m) {
+    if (m === '&') return '&amp;';
+    if (m === '<') return '&lt;';
+    if (m === '>') return '&gt;';
+    return m;
+  });
+}
+
+function buildTelegramMessage(formData) {
+  const name = formData.name.trim() || 'Не указано';
+  const phone = formData.phone.trim() || 'Не указан';
+  const attendance = formData.attending;
+  const guestsCount = formData.guestsCount;
+  const wishes = formData.wishes.trim() || '—';
+  
+  let statusEmoji = '';
+  if (attendance.includes('да, буду')) statusEmoji = '✅';
+  else if (attendance.includes('не смогу')) statusEmoji = '❌';
+  else statusEmoji = '⏳';
+  
+  return `🎉 <b>НОВЫЙ ОТВЕТ НА ПРИГЛАШЕНИЕ (Юбилей)</b> 🎉
+
+👤 <b>Имя:</b> ${escapeHtml(name)}
+📞 <b>Телефон:</b> ${escapeHtml(phone)}
+${statusEmoji} <b>Присутствие:</b> ${escapeHtml(attendance)}
+👥 <b>Количество гостей:</b> ${guestsCount}
+💬 <b>Пожелания:</b> ${escapeHtml(wishes)}
+
+📅 15 мая 2026 · стиль «Стиляги»
+📍 Ресторан «Звезда Кочевника», г. Чита`;
+}
+
+function observeFourthPage() {
+  const fourthPage = document.querySelector('.fourthPage');
+  if (!fourthPage) return;
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        fourthPage.classList.add('visible');
+        observer.unobserve(fourthPage);
+      }
+    });
+  }, { threshold: 0.2 });
+  
+  observer.observe(fourthPage);
+}
+
+function initRadioStyles() {
+  const radioOptions = document.querySelectorAll('.radio-option');
+  radioOptions.forEach(opt => {
+    const radio = opt.querySelector('input[type="radio"]');
+    if (radio) {
+      radio.addEventListener('change', function() {
+        radioOptions.forEach(o => o.classList.remove('selected'));
+        if (this.checked) opt.classList.add('selected');
+      });
+      if (radio.checked) opt.classList.add('selected');
+    }
+  });
+}
+
+function initForm() {
+  const form = document.getElementById('telegramPollForm');
+  if (!form) return;
+  
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const nameInput = document.getElementById('guestName');
+    const phoneInput = document.getElementById('guestPhone');
+    const attendingRadios = document.querySelectorAll('input[name="attending"]');
+    const countInput = document.getElementById('guestCount');
+    const wishesInput = document.getElementById('guestWishes');
+    const statusDiv = document.getElementById('formStatus');
+    
+    let attendingValue = '';
+    for (let radio of attendingRadios) {
+      if (radio.checked) { attendingValue = radio.value; break; }
+    }
+    
+    if (!nameInput.value.trim()) {
+      statusDiv.innerHTML = '<span class="status-error">❌ Пожалуйста, укажите ваше имя</span>';
+      setTimeout(() => { statusDiv.innerHTML = ''; }, 3000);
+      return;
+    }
+    if (!phoneInput.value.trim()) {
+      statusDiv.innerHTML = '<span class="status-error">📞 Укажите номер телефона</span>';
+      setTimeout(() => { statusDiv.innerHTML = ''; }, 3000);
+      return;
+    }
+    
+    const submitBtn = form.querySelector('.submit-btn');
+    const originalText = submitBtn.innerText;
+    submitBtn.disabled = true;
+    submitBtn.innerText = 'Отправка...';
+    statusDiv.innerHTML = '<span style="color:#ffd966;">⏳ Отправляем...</span>';
+    
+    const formData = {
+      name: nameInput.value,
+      phone: phoneInput.value,
+      attending: attendingValue,
+      guestsCount: countInput.value,
+      wishes: wishesInput.value
+    };
+    
+    const messageText = buildTelegramMessage(formData);
+    const success = await sendToTelegram(messageText);
+    
+    if (success) {
+      statusDiv.innerHTML = '<span class="status-success">✨ Спасибо! Ваш ответ отправлен. Ждём вас! ✨</span>';
+      nameInput.value = '';
+      phoneInput.value = '';
+      document.querySelector('input[name="attending"][value="да, буду с радостью!"]').checked = true;
+      countInput.value = '1';
+      wishesInput.value = '';
+      initRadioStyles();
+      setTimeout(() => { statusDiv.innerHTML = ''; }, 5000);
+    } else {
+      statusDiv.innerHTML = '<span class="status-error">⚠️ Ошибка. Попробуйте позже.</span>';
+      setTimeout(() => { statusDiv.innerHTML = ''; }, 5000);
+    }
+    
+    submitBtn.disabled = false;
+    submitBtn.innerText = originalText;
+  });
+}
+
+setTimeout(() => {
+  observeFourthPage();
+  initRadioStyles();
+  initForm();
+}, 500);
