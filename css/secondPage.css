@@ -316,3 +316,125 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.location-container {
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
+      border-radius: 30px;
+      padding: 25px 20px;
+      border: 1px solid rgba(245, 50, 50, 0.5);
+      box-shadow: 0 0 30px rgba(245, 0, 0, 0.2);
+      width: 100%;
+      max-width: 500px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .location-container:hover {
+      border-color: rgba(245, 80, 80, 0.8);
+      box-shadow: 0 0 40px rgba(245, 0, 0, 0.3);
+    }
+
+    .location-title {
+      font-family: "Great Vibes", cursive;
+      font-size: clamp(28px, 6vw, 36px);
+      color: rgba(245, 50, 50, 0.95);
+      margin-bottom: 15px;
+      text-shadow: 0 0 15px rgba(245, 0, 0, 0.5);
+    }
+
+    .location-name {
+      font-size: clamp(20px, 5vw, 28px);
+      color: #ff6666;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+      text-shadow: 0 0 8px rgba(245, 50, 50, 0.4);
+    }
+
+    .location-address {
+      font-size: clamp(12px, 3.5vw, 16px);
+      color: rgba(255, 200, 200, 0.9);
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    /* Контейнер для карты */
+    .map-container {
+      width: 100%;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 300px;
+      border: none;
+      border-radius: 15px;
+    }
+
+    /* Адаптив для карты */
+    @media (max-width: 768px) {
+      .map-container iframe {
+        height: 250px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .map-container iframe {
+        height: 220px;
+      }
+    }
+
+    /* Принудительное центрирование */
+    .secondPage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .calendar-container,
+    .location-container {
+      margin: 0 auto;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    @media (max-width: 768px) {
+
+      .calendar-container,
+      .location-container {
+        width: calc(100% - 40px);
+        max-width: 450px;
+      }
+    }
+
+    @media (max-width: 480px) {
+
+      .calendar-container,
+      .location-container {
+        width: calc(100% - 30px);
+      }
+    }
+
+
+

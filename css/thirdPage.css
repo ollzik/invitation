@@ -1,10 +1,8 @@
 /* Стили для третьей страницы */
 .thirdPage {
     min-height: 100vh;
-    height: 100vh;
     display: flex;
     flex-direction: column;
-
     padding: 40px 20px;
     position: relative;
     z-index: 2;
@@ -26,7 +24,7 @@
     position: absolute;
     top: 8%;
     right: 8%;
-    font-size: 45px;
+    font-size: clamp(30px, 6vw, 45px);
     color: rgba(245, 50, 50, 0.2);
     animation: floatDecorThird 9s ease-in-out infinite;
     pointer-events: none;
@@ -37,7 +35,7 @@
     position: absolute;
     bottom: 12%;
     left: 5%;
-    font-size: 55px;
+    font-size: clamp(35px, 7vw, 55px);
     color: rgba(245, 208, 0, 0.15);
     animation: floatDecorThird 11s ease-in-out infinite reverse;
     pointer-events: none;
@@ -55,7 +53,7 @@
 /* Заголовок */
 .thirdPage-title {
     font-family: "Great Vibes", cursive;
-    font-size: 32px;
+    font-size: clamp(28px, 6vw, 42px);
     text-align: center;
     letter-spacing: 2px;
     white-space: pre-wrap;
@@ -69,22 +67,22 @@
 
 .thirdPage-subtitle {
     font-size: clamp(14px, 3.5vw, 18px);
-    color: rgba(29, 24, 23, 0.8);
+    color: rgba(255, 255, 255, 0.85);
     text-align: center;
     margin-bottom: 20px;
     letter-spacing: 1px;
 }
 
-/* Контейнер слайдера */
+/* Контейнер слайдера - полная адаптация */
 .slider-container {
     background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(10px);
-    border-radius: 30px;
-    padding: 20px;
+    border-radius: clamp(20px, 5vw, 30px);
+    padding: clamp(12px, 3vw, 20px);
     border: 1px solid rgba(245, 50, 50, 0.5);
     box-shadow: 0 0 30px rgba(245, 0, 0, 0.2);
     width: 100%;
-    max-width: 600px;
+    max-width: min(90vw, 600px);
     position: relative;
     transition: all 0.3s ease;
 }
@@ -94,17 +92,18 @@
     box-shadow: 0 0 40px rgba(245, 0, 0, 0.3);
 }
 
-/* Слайдер */
+/* Слайдер - резиновый */
 .slider {
     position: relative;
     width: 100%;
     overflow: hidden;
-    border-radius: 20px;
+    border-radius: clamp(15px, 4vw, 20px);
 }
 
 .slider-track {
     display: flex;
     transition: transform 0.5s ease-in-out;
+    will-change: transform;
 }
 
 .slide {
@@ -118,137 +117,99 @@
     height: auto;
     aspect-ratio: 16 / 10;
     object-fit: cover;
-    border-radius: 15px;
+    border-radius: clamp(10px, 3vw, 15px);
+    display: block;
 }
 
-/* Кнопки навигации */
+/* Кнопки навигации - адаптивные */
 .slider-button {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(245, 50, 50, 0.5);
+    background: rgba(245, 50, 50, 0.6);
     backdrop-filter: blur(5px);
     color: #ffd700;
     border: 1px solid rgba(245, 208, 0, 0.5);
-    width: 40px;
-    height: 40px;
+    width: clamp(30px, 8vw, 45px);
+    height: clamp(30px, 8vw, 45px);
     border-radius: 50%;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 24px;
+    font-size: clamp(18px, 5vw, 28px);
     transition: all 0.3s ease;
     z-index: 10;
+    opacity: 0.9;
+}
+
+/* На десктопе кнопки видны всегда, на мобильных - при наведении/активности */
+@media (hover: hover) {
+    .slider-button {
+        opacity: 0.7;
+    }
+    
+    .slider-container:hover .slider-button {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .slider-button {
+        opacity: 0.9;
+        background: rgba(245, 50, 50, 0.8);
+    }
 }
 
 .slider-button:hover {
-    background: rgba(245, 80, 80, 0.8);
+    background: rgba(245, 80, 80, 0.9);
     transform: translateY(-50%) scale(1.1);
     border-color: rgba(245, 208, 0, 0.8);
 }
 
 .slider-button-prev {
-    left: 10px;
+    left: clamp(5px, 2vw, 15px);
 }
 
 .slider-button-next {
-    right: 10px;
+    right: clamp(5px, 2vw, 15px);
 }
 
-/* Точки (индикаторы) */
+/* Точки (индикаторы) - адаптивные */
 .slider-dots {
     display: flex;
     justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
+    gap: clamp(6px, 2vw, 12px);
+    margin-top: clamp(15px, 4vw, 25px);
+    flex-wrap: wrap;
 }
 
 .slider-dot {
-    width: 10px;
-    height: 10px;
+    width: clamp(8px, 2.5vw, 12px);
+    height: clamp(8px, 2.5vw, 12px);
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.4);
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .slider-dot.active {
-    background: #ff4444;
-    width: 25px;
-    border-radius: 5px;
+    background: linear-gradient(135deg, #ff4444, #ff6666);
+    width: clamp(20px, 5vw, 30px);
+    border-radius: clamp(4px, 1.5vw, 6px);
     box-shadow: 0 0 10px rgba(245, 50, 50, 0.6);
 }
 
 .slider-dot:hover {
-    background: rgba(245, 80, 80, 0.7);
+    background: rgba(245, 80, 80, 0.8);
     transform: scale(1.2);
 }
 
-/* Адаптив */
-@media (max-width: 768px) {
-    .thirdPage {
-        padding: 30px 15px;
-        gap: 20px;
-    }
-    
-    .slider-container {
-        padding: 15px;
-        max-width: 500px;
-    }
-    
-    .slider-button {
-        width: 35px;
-        height: 35px;
-        font-size: 20px;
-    }
-}
-
-@media (max-width: 480px) {
-    .thirdPage {
-        padding: 20px 12px;
-    }
-    
-    .slider-container {
-        padding: 12px;
-        max-width: 100%;
-    }
-    
-    .slider-button {
-        width: 30px;
-        height: 30px;
-        font-size: 18px;
-    }
-    
-    .slider-dot {
-        width: 8px;
-        height: 8px;
-    }
-    
-    .slider-dot.active {
-        width: 20px;
-    }
-}
-
-@media (max-width: 360px) {
-    .thirdPage-title {
-        font-size: 24px;
-    }
-    
-    .thirdPage-subtitle {
-        font-size: 12px;
-    }
-    
-    .slider-button {
-        width: 28px;
-        height: 28px;
-        font-size: 16px;
-    }
-}
 /* Принудительное центрирование */
 .thirdPage {
     display: flex;
     flex-direction: column;
+    align-items: center;
     text-align: center;
 }
 
@@ -256,4 +217,253 @@
     align-self: center;
     margin-left: auto;
     margin-right: auto;
+}
+
+/* ========== ПОЛНАЯ АДАПТАЦИЯ ПО РАЗМЕРАМ ========== */
+
+/* Большие десктопы (1200px+) */
+@media (min-width: 1200px) {
+    .thirdPage {
+        padding: 60px 20px;
+        gap: 40px;
+    }
+    
+    .slider-container {
+        max-width: 700px;
+    }
+    
+    .slide img {
+        aspect-ratio: 16 / 9;
+    }
+}
+
+/* Десктопы (992px - 1199px) */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .thirdPage {
+        padding: 50px 20px;
+        gap: 35px;
+    }
+    
+    .slider-container {
+        max-width: 650px;
+    }
+}
+
+/* Планшеты (768px - 991px) */
+@media (min-width: 768px) and (max-width: 991px) {
+    .thirdPage {
+        padding: 40px 30px;
+        gap: 30px;
+    }
+    
+    .slider-container {
+        max-width: 550px;
+        padding: 18px;
+    }
+    
+    .slide img {
+        aspect-ratio: 4 / 3;
+    }
+}
+
+/* Мобильные (481px - 767px) */
+@media (min-width: 481px) and (max-width: 767px) {
+    .thirdPage {
+        padding: 30px 20px;
+        gap: 25px;
+    }
+    
+    .slider-container {
+        padding: 15px;
+        border-radius: 25px;
+    }
+    
+    .slide img {
+        aspect-ratio: 1 / 1;
+        min-height: auto;
+    }
+}
+
+/* Маленькие мобильные (376px - 480px) */
+@media (min-width: 376px) and (max-width: 480px) {
+    .thirdPage {
+        padding: 25px 15px;
+        gap: 20px;
+    }
+    
+    .slider-container {
+        padding: 12px;
+        border-radius: 20px;
+    }
+    
+    .thirdPage-title {
+        margin-bottom: 10px;
+    }
+    
+    .thirdPage-subtitle {
+        margin-bottom: 10px;
+    }
+    
+    .slide img {
+        aspect-ratio: 3 / 4;
+        min-height: 250px;
+    }
+}
+
+/* Очень маленькие (320px - 375px) */
+@media (min-width: 320px) and (max-width: 375px) {
+    .thirdPage {
+        padding: 20px 12px;
+        gap: 15px;
+    }
+    
+    .slider-container {
+        padding: 10px;
+        border-radius: 18px;
+    }
+    
+    .thirdPage-title {
+        font-size: 22px;
+        padding: 10px 0px 0px 0px;
+    }
+    
+    .thirdPage-subtitle {
+        font-size: 11px;
+    }
+    
+    .slide img {
+        aspect-ratio: 2 / 3;
+        min-height: 250px;
+    }
+    
+    .slider-dots {
+        gap: 8px;
+        margin-top: 12px;
+    }
+}
+
+/* iPhone SE и экстремально маленькие (до 320px) */
+@media (max-width: 320px) {
+    .thirdPage {
+        padding: 15px 10px;
+        gap: 12px;
+    }
+    
+    .slider-container {
+        padding: 8px;
+        border-radius: 15px;
+    }
+    
+    .thirdPage-title {
+        font-size: 20px;
+        margin-bottom: 5px;
+    }
+    
+    .thirdPage-subtitle {
+        font-size: 10px;
+        margin-bottom: 5px;
+    }
+    
+    .slide img {
+        aspect-ratio: 2 / 3;
+        min-height: 200px;
+    }
+}
+
+/* Альбомная ориентация на мобильных */
+@media (max-height: 500px) and (orientation: landscape) {
+    .thirdPage {
+        min-height: auto;
+        padding: 15px 20px;
+        gap: 15px;
+    }
+    
+    .thirdPage-title {
+        font-size: 24px;
+        padding: 5px 0px 0px 0px;
+        margin-bottom: 5px;
+    }
+    
+    .thirdPage-subtitle {
+        margin-bottom: 5px;
+    }
+    
+    .slider-container {
+        max-width: 80%;
+        padding: 10px;
+    }
+    
+    .slide img {
+        aspect-ratio: 16 / 9;
+        min-height: auto;
+        max-height: 50vh;
+    }
+    
+    .slider-dots {
+        margin-top: 8px;
+    }
+}
+
+/* Планшеты в альбомной ориентации */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    .thirdPage {
+        padding: 20px 30px;
+    }
+    
+    .slider-container {
+        max-width: 70%;
+    }
+    
+    .slide img {
+        aspect-ratio: 16 / 9;
+        max-height: 55vh;
+    }
+}
+
+/* Для устройств с высоким DPI (Retina) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .slider-button {
+        backdrop-filter: blur(8px);
+    }
+    
+    .slider-container {
+        backdrop-filter: blur(12px);
+    }
+}
+
+/* Плавная анимация для resize */
+.slider-track,
+.slider-button,
+.slider-dot {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Улучшенная читаемость на мобильных */
+@media (max-width: 480px) {
+    .thirdPage-subtitle {
+        line-height: 1.4;
+    }
+}
+
+/* Touch-friendly для сенсорных экранов */
+@media (hover: none) and (pointer: coarse) {
+    .slider-button {
+        width: 40px;
+        height: 40px;
+        opacity: 0.9;
+        background: rgba(245, 50, 50, 0.8);
+    }
+    
+    .slider-button:active {
+        transform: translateY(-50%) scale(0.95);
+    }
+    
+    .slider-dot {
+        width: 10px;
+        height: 10px;
+    }
+    
+    .slider-dot.active {
+        width: 25px;
+    }
 }

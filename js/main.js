@@ -320,11 +320,9 @@ function initSlider() {
     
     // СЮДА ВСТАВЬТЕ ПУТИ К ВАШИМ ФОТОГРАФИЯМ
     const images = [
-        'images/photoOne.png',  // замените на свои
-        'images/photoOne.png',
-        'images/photoOne.png',
-        'images/photoOne.png',
-        'images/photoOne.png'
+        'images/wear1.png',  // замените на свои
+        'images/wear2.png',
+        'images/wear3.png',
     ];
     
     if (!sliderTrack || images.length === 0) return;
@@ -418,3 +416,6 @@ setTimeout(() => {
     if (prevBtn) prevBtn.addEventListener('click', prevSlide);
     if (nextBtn) nextBtn.addEventListener('click', nextSlide);
 }, 600);
+
+
+
