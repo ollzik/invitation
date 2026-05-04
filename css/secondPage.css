@@ -442,3 +442,106 @@
             display: none;
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* ========== ДЕСКТОПНАЯ АДАПТАЦИЯ ДЛЯ ВТОРОЙ СТРАНИЦЫ ========== */
+@media (min-width: 1024px) {
+    .secondPage {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 50px;
+        padding: 60px 40px;
+    }
+
+    .calendar-container,
+    .location-container {
+        max-width: 500px;
+        width: 45%;
+        min-width: 400px;
+        padding: 35px 30px;
+        transition: transform 0.3s ease;
+    }
+
+    .calendar-container:hover,
+    .location-container:hover {
+        transform: translateY(-8px);
+    }
+
+    .calendar {
+        padding: 20px;
+    }
+
+    .calendar-month {
+        font-size: 42px;
+        margin-bottom: 15px;
+    }
+
+    .calendar-year {
+        font-size: 24px;
+        margin-bottom: 30px;
+    }
+
+    .calendar-day-name {
+        font-size: 16px;
+        padding: 12px 0;
+    }
+
+    .calendar-date {
+        padding: 12px 0;
+        font-size: 18px;
+    }
+
+    .calendar-date.highlight {
+        transform: scale(1.1);
+    }
+
+    .location-title {
+        font-size: 42px;
+    }
+
+    .location-name {
+        font-size: 32px;
+    }
+
+    .location-address {
+        font-size: 18px;
+    }
+
+    .map-container iframe {
+        height: 350px;
+        border-radius: 20px;
+    }
+}
+
+@media (min-width: 1280px) {
+    .calendar-container,
+    .location-container {
+        max-width: 550px;
+        width: 45%;
+        padding: 40px 35px;
+    }
+
+    .calendar-date {
+        padding: 14px 0;
+        font-size: 20px;
+    }
+
+    .map-container iframe {
+        height: 400px;
+    }
+}
