@@ -409,7 +409,6 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
     }
 
     .calendar-container,
@@ -438,3 +437,8 @@
 
 
 
+    @media (max-width: 380px){
+        .map-container{
+            display: none;
+        }
+    }
