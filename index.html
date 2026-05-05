@@ -86,55 +86,72 @@
       <div class="slider-dots" id="sliderDots"></div>
     </div>
   </div>
-   <div class="fourthPage">
-      <div class="poll-container">
-        <div class="poll-title">Ваш ответ</div>
-        <div class="poll-sub">Дорогие гости, ждём подтверждения ✨</div>
+  <div class="fourthPage">
+  <div class="poll-container">
+    <div class="poll-title">Ваш ответ</div>
+    <div class="poll-sub">Дорогие гости, ждём подтверждения ✨</div>
 
-        <form id="telegramPollForm" class="rsvp-form">
-          <div class="form-group">
-            <label>👤 Ваше имя</label>
-            <input type="text" id="guestName" placeholder="Например: Екатерина" required>
-          </div>
-
-          <div class="form-group">
-            <label>📞 Телефон (для связи)</label>
-            <input type="tel" id="guestPhone" placeholder="+7 999 123-45-67" required>
-          </div>
-
-          <div class="form-group">
-            <label>✅ Сможете присутствовать?</label>
-            <div class="radio-group" id="attendingGroup">
-              <label class="radio-option">
-                <input type="radio" name="attending" value="да, буду с радостью!" checked> 
-                <span>Да, буду!</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="attending" value="к сожалению, не смогу"> 
-                <span>Не смогу</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="attending" value="возможно, уточню позже"> 
-                <span>Пока не знаю</span>
-              </label>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>🍽️ Количество гостей (включая вас)</label>
-            <input type="number" id="guestCount" min="1" max="6" value="1">
-          </div>
-
-          <div class="form-group">
-            <label>💬 Пожелания / комментарий</label>
-            <textarea id="guestWishes" placeholder="Аллергии, особые предпочтения или тёплые слова..."></textarea>
-          </div>
-
-          <button type="submit" class="submit-btn">✨ Отправить ✨</button>
-          <div id="formStatus" class="form-status"></div>
-        </form>
+    <form id="telegramPollForm" class="rsvp-form">
+      <div class="form-group">
+        <label>👤 Ваше имя</label>
+        <input type="text" id="guestName" placeholder="Например: Екатерина" required>
       </div>
-    </div>
+
+      <div class="form-group">
+        <label>✅ Сможете присутствовать?</label>
+        <div class="radio-group" id="attendingGroup">
+          <label class="radio-option">
+            <input type="radio" name="attending" value="да, буду с радостью!" checked> 
+            <span>Да, буду!</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="attending" value="к сожалению, не смогу"> 
+            <span>Не смогу</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="attending" value="возможно, уточню позже"> 
+            <span>Пока не знаю</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>🍽️ Количество гостей (включая вас)</label>
+        <input type="number" id="guestCount" min="1" max="6" value="1">
+      </div>
+
+      <div class="form-group">
+        <label>🍷 Предпочитаемый алкоголь</label>
+        <div class="checkbox-group" id="alcoholGroup">
+          <label class="checkbox-option">
+            <input type="checkbox" name="alcohol" value="Вино"> 
+            <span>🍷 Вино</span>
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" name="alcohol" value="Водка"> 
+            <span>🥃 Водка</span>
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" name="alcohol" value="Пиво"> 
+            <span>🍺 Пиво</span>
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" name="alcohol" value="Другое"> 
+            <span>🍸 Другое</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>💬 Пожелания / комментарий</label>
+        <textarea id="guestWishes" placeholder="Аллергии, особые предпочтения или тёплые слова..."></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn">✨ Отправить ✨</button>
+      <div id="formStatus" class="form-status"></div>
+    </form>
+  </div>
+</div>
   </main>
   <script src="js/main.js"></script>
   <script src="js/preloader.js"></script>

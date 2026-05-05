@@ -339,6 +339,7 @@ function observeThirdPage() {
 
 // -------------------- ЧЕТВЕРТАЯ СТРАНИЦА (опрос Telegram) --------------------
 // -------------------- ЧЕТВЕРТАЯ СТРАНИЦА (опрос Telegram) --------------------
+// -------------------- ЧЕТВЕРТАЯ СТРАНИЦА (опрос Telegram) --------------------
 const BOT_TOKEN = '8026015816:AAHxjC5iCQf0DteP4_URNRw74JE6pXKXMho';
 const CHAT_ID = '-1003831190327';
 
@@ -376,9 +377,9 @@ function escapeHtml(str) {
 
 function buildTelegramMessage(formData) {
     const name = formData.name.trim() || 'Не указано';
-    const phone = formData.phone.trim() || 'Не указан';
     const attendance = formData.attending;
     const guestsCount = formData.guestsCount;
+    const alcohol = formData.alcohol || 'Не выбрано';
     const wishes = formData.wishes.trim() || '—';
     
     let statusEmoji = '';
@@ -389,9 +390,9 @@ function buildTelegramMessage(formData) {
     return `🎉 <b>НОВЫЙ ОТВЕТ НА ПРИГЛАШЕНИЕ (Юбилей)</b> 🎉
 
 👤 <b>Имя:</b> ${escapeHtml(name)}
-📞 <b>Телефон:</b> ${escapeHtml(phone)}
 ${statusEmoji} <b>Присутствие:</b> ${escapeHtml(attendance)}
 👥 <b>Количество гостей:</b> ${guestsCount}
+🍷 <b>Предпочитаемый алкоголь:</b> ${escapeHtml(alcohol)}
 💬 <b>Пожелания:</b> ${escapeHtml(wishes)}
 
 📅 15 мая 2026 · стиль «Стиляги»
@@ -405,7 +406,6 @@ function handleArrowOnFourthPage() {
     if (!scrollArrow || !fourthPage) return;
     
     const fourthRect = fourthPage.getBoundingClientRect();
-    // Если верх четвертой страницы достиг 100px от верха экрана - скрываем стрелку
     if (fourthRect.top <= 100) {
         scrollArrow.style.opacity = '0';
         scrollArrow.style.visibility = 'hidden';
@@ -431,13 +431,11 @@ function observeFourthPage() {
     }, { threshold: 0.2 });
     
     observer.observe(fourthPage);
-    
-    // Добавляем обработчик скролла для стрелки
     window.addEventListener('scroll', handleArrowOnFourthPage);
-    // Вызываем один раз для инициализации
     setTimeout(handleArrowOnFourthPage, 100);
 }
 
+// Стилизация радио-кнопок
 function initRadioStyles() {
     const radioOptions = document.querySelectorAll('.radio-option');
     radioOptions.forEach(opt => {
@@ -452,6 +450,33 @@ function initRadioStyles() {
     });
 }
 
+// Стилизация чекбоксов
+function initCheckboxStyles() {
+    const checkboxOptions = document.querySelectorAll('.checkbox-option');
+    checkboxOptions.forEach(opt => {
+        const checkbox = opt.querySelector('input[type="checkbox"]');
+        if (checkbox) {
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    opt.classList.add('selected');
+                } else {
+                    opt.classList.remove('selected');
+                }
+            });
+            if (checkbox.checked) opt.classList.add('selected');
+        }
+    });
+}
+
+// Получение выбранных алкогольных предпочтений
+function getSelectedAlcohol() {
+    const checkboxes = document.querySelectorAll('input[name="alcohol"]:checked');
+    const selected = Array.from(checkboxes).map(cb => cb.value);
+    if (selected.length === 0) return 'Не выбрано';
+    if (selected.length === 1) return selected[0];
+    return selected.join(', ');
+}
+
 function initForm() {
     const form = document.getElementById('telegramPollForm');
     if (!form) return;
@@ -460,7 +485,6 @@ function initForm() {
         e.preventDefault();
         
         const nameInput = document.getElementById('guestName');
-        const phoneInput = document.getElementById('guestPhone');
         const attendingRadios = document.querySelectorAll('input[name="attending"]');
         const countInput = document.getElementById('guestCount');
         const wishesInput = document.getElementById('guestWishes');
@@ -476,11 +500,6 @@ function initForm() {
             setTimeout(() => { statusDiv.innerHTML = ''; }, 3000);
             return;
         }
-        if (!phoneInput.value.trim()) {
-            statusDiv.innerHTML = '<span class="status-error">📞 Укажите номер телефона</span>';
-            setTimeout(() => { statusDiv.innerHTML = ''; }, 3000);
-            return;
-        }
         
         const submitBtn = form.querySelector('.submit-btn');
         const originalText = submitBtn.innerText;
@@ -490,9 +509,9 @@ function initForm() {
         
         const formData = {
             name: nameInput.value,
-            phone: phoneInput.value,
             attending: attendingValue,
             guestsCount: countInput.value,
+            alcohol: getSelectedAlcohol(),
             wishes: wishesInput.value
         };
         
@@ -502,10 +521,15 @@ function initForm() {
         if (success) {
             statusDiv.innerHTML = '<span class="status-success">✨ Спасибо! Ваш ответ отправлен. Ждём вас! ✨</span>';
             nameInput.value = '';
-            phoneInput.value = '';
             const defaultRadio = document.querySelector('input[name="attending"][value="да, буду с радостью!"]');
             if (defaultRadio) defaultRadio.checked = true;
             countInput.value = '1';
+            // Снимаем все чекбоксы
+            const allCheckboxes = document.querySelectorAll('input[name="alcohol"]');
+            allCheckboxes.forEach(cb => {
+                cb.checked = false;
+                cb.closest('.checkbox-option')?.classList.remove('selected');
+            });
             wishesInput.value = '';
             initRadioStyles();
             setTimeout(() => { statusDiv.innerHTML = ''; }, 5000);
@@ -554,28 +578,23 @@ function addFloatingDecorToFourth() {
         document.head.appendChild(style);
     }
 }
+
 // -------------------- ЗАПУСК ВСЕХ КОМПОНЕНТОВ --------------------
 setTimeout(() => {
-    // Вторая страница
     generateCalendar();
     observeSecondPage();
-    
-    // Третья страница
     observeThirdPage();
     initSlider();
-    
-    // Четвертая страница
-    observeFourthPage();  // Теперь здесь добавляется и обработчик стрелки
+    observeFourthPage();
     initRadioStyles();
+    initCheckboxStyles();  // Новая функция для чекбоксов
     initForm();
     addFloatingDecorToFourth();
 }, 500);
 
-// Добавляем обработчики кнопок слайдера
 setTimeout(() => {
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
-    
     if (prevBtn) prevBtn.addEventListener('click', prevSlide);
     if (nextBtn) nextBtn.addEventListener('click', nextSlide);
 }, 600);

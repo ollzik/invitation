@@ -394,3 +394,97 @@ input:focus, select:focus, textarea:focus {
     margin-top: 4px;
   }
 }
+
+
+/* Стили для чекбоксов (алкоголь) */
+.checkbox-group {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.checkbox-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  background: rgba(0,0,0,0.3);
+  padding: 5px 14px;
+  border-radius: 50px;
+  border: 1px solid rgba(245, 80, 80, 0.4);
+  transition: 0.2s;
+}
+
+.checkbox-option.selected {
+  background: rgba(245, 50, 50, 0.3);
+  border-color: #ffaa66;
+  box-shadow: 0 0 6px rgba(245, 150, 0, 0.3);
+}
+
+.checkbox-option input {
+  width: 16px;
+  height: 16px;
+  accent-color: #e63946;
+  margin: 0;
+  cursor: pointer;
+}
+
+.checkbox-option span {
+  font-size: 13px;
+  color: #ffefdb;
+}
+
+.checkbox-option:hover {
+  background: rgba(245, 50, 50, 0.2);
+  transform: scale(1.02);
+}
+
+/* Адаптация для маленьких экранов */
+@media (max-width: 550px) {
+  .checkbox-group {
+    gap: 10px;
+  }
+  
+  .checkbox-option {
+    padding: 4px 12px;
+  }
+  
+  .checkbox-option span {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 420px) {
+  .checkbox-group {
+    gap: 8px;
+  }
+  
+  .checkbox-option {
+    padding: 3px 10px;
+  }
+  
+  .checkbox-option span {
+    font-size: 11px;
+  }
+}
+
+/* Десктопная адаптация */
+@media (min-width: 1024px) {
+  .checkbox-group {
+    gap: 20px;
+  }
+  
+  .checkbox-option {
+    padding: 8px 20px;
+  }
+  
+  .checkbox-option span {
+    font-size: 16px;
+  }
+  
+  .checkbox-option input {
+    width: 18px;
+    height: 18px;
+  }
+}
